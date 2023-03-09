@@ -25,17 +25,6 @@ function guardarpost(e) {
   e.preventDefault();
 }
 
-function longTextArea(contenido){
-
-    if (contenido.length >=150)
-    {
-      alert('Por Favor contenido del post no debe exceder de 150 caracteres');
-      contenido.focus();
-      return false;
-    }else{
-      return true;
-    }
-}
 function longInput(titulo){
 
   if (titulo.length >=50)
@@ -46,6 +35,18 @@ function longInput(titulo){
   }else{
     return true;
   }
+}
+
+function longTextArea(contenido){
+
+    if (contenido.length >=150)
+    {
+      alert('Por Favor contenido del post no debe exceder de 150 caracteres');
+      contenido.focus();
+      return false;
+    }else{
+      return true;
+    }
 }
 
 function getposts() {
