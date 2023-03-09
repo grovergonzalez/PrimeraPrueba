@@ -1,42 +1,46 @@
-document.getElementById('formulario').addEventListener('submit', guardarPost);
+document.getElementById('formulario').addEventListener('submit', guardarpost);
 
-function guardarPost(e) {
+function guardarpost(e) {
   let titulo = document.getElementById('titulo').value;
-  
+  let contenido = document.getElementById('contenido').value;
+
   let post = {
     titulo,
+    contenido
   };
 
-  if(localStorage.getItem('Posts') === null) {
-    let post = [];
-    post.push(post);
-    localStorage.setItem('Posts', JSON.stringify(post));
+  if(localStorage.getItem('posts') === null) {
+    console.error('No es posible publicar un post sin título');
+    let posts = [];
+    posts.push(post);
+    localStorage.setItem('posts', JSON.stringify(posts));
   } else {
-    let post = JSON.parse(localStorage.getItem('Posts'));
-    post.push(nota);
-    localStorage.setItem('Posts', JSON.stringify(post));
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    posts.push(post);
+    localStorage.setItem('posts', JSON.stringify(posts));
   }
 
-  getPosts();
+  getposts();
   document.getElementById('formulario').reset();
   e.preventDefault();
 }
 
-function getPosts() {
-  let post = JSON.parse(localStorage.getItem('Posts'));
-  let postView = document.getElementById('Posts');
-  postView.innerHTML = '';
-  fecha = new Date();
-  for(let i = 0; i < post.length; i++) {
-    let titulo = post[i].titulo;
+function getposts() {
+  let posts = JSON.parse(localStorage.getItem('posts'));
+  let postsView = document.getElementById('posts');
+  postsView.innerHTML = '';
+  for(let i = 0; i < posts.length; i++) {
+    let titulo = posts[i].titulo;
+    let contenido = posts[i].contenido;
 
-    postView.innerHTML += `<div class="card mb-3">
+    postsView.innerHTML += `<div class="card mb-3">
         <div class="card-body">
-        <p>${fecha}</p>
-        <p>${titulo} </p>
+        <p>${titulo}  </p>
+        <p>${contenido} </p>
+         
           </p>
         </div>
       </div>`;
   }
 }
-getPosts();
+getposts();
