@@ -25,6 +25,18 @@ function guardarpost(e) {
   e.preventDefault();
 }
 
+function VerificarTitulo(titulo){
+
+  if (titulo.length == 0)
+  {
+    alert('No es posible publicar un post sin título');
+    titulo.focus();
+    return false;
+  }else{
+    return true;
+  }
+}
+
 function longInput(titulo){
 
   if (titulo.length >=50)
@@ -53,17 +65,17 @@ function getposts() {
   let posts = JSON.parse(localStorage.getItem('posts'));
   let postsView = document.getElementById('posts');
   postsView.innerHTML = '';
-  longInput(posts.titulo.value);
-  longTextArea(posts.contenido.value);
+  VerificarTitulo(titulo.value);
+  longInput(titulo.value);
+  longTextArea(contenido.value);
   for(let i = 0; i < posts.length; i++) {
     let titulo = posts[i].titulo;
     let contenido = posts[i].contenido;
-
+    
     postsView.innerHTML += `<div class="card mb-3">
         <div class="card-body">
         <p> Titulo: ${titulo}  </p>
         <p> Contenido: ${contenido} </p>
-         
           </p>
         </div>
       </div>`;
