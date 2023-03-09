@@ -10,7 +10,7 @@ function guardarpost(e) {
   };
 
   if(localStorage.getItem('posts') === null) {
-    console.error('No es posible publicar un post sin título');
+    console.log('No es posible publicar un post sin título');
     let posts = [];
     posts.push(post);
     localStorage.setItem('posts', JSON.stringify(posts));
@@ -25,18 +25,43 @@ function guardarpost(e) {
   e.preventDefault();
 }
 
+function longTextArea(contenido){
+
+    if (contenido.length >=150)
+    {
+      alert('Por Favor contenido del post no debe exceder de 150 caracteres');
+      contenido.focus();
+      return false;
+    }else{
+      return true;
+    }
+}
+function longInput(titulo){
+
+  if (titulo.length >=50)
+  {
+    alert('Por Favor el titulo del post no debe exceder de 50 caracteres');
+    titulo.focus();
+    return false;
+  }else{
+    return true;
+  }
+}
+
 function getposts() {
   let posts = JSON.parse(localStorage.getItem('posts'));
   let postsView = document.getElementById('posts');
   postsView.innerHTML = '';
+  longInput(posts.titulo.value);
+  longTextArea(posts.contenido.value);
   for(let i = 0; i < posts.length; i++) {
     let titulo = posts[i].titulo;
     let contenido = posts[i].contenido;
 
     postsView.innerHTML += `<div class="card mb-3">
         <div class="card-body">
-        <p>${titulo}  </p>
-        <p>${contenido} </p>
+        <p> Titulo: ${titulo}  </p>
+        <p> Contenido: ${contenido} </p>
          
           </p>
         </div>
